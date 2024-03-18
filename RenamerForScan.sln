@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.5.33502.453
+VisualStudioVersion = 17.9.34701.34
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RenamerForScan", "RenamerForScan.csproj", "{3F24C84F-A4BB-4399-A3C2-A11F0F2E77B4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RenamerForScan", "RenamerForScan\RenamerForScan.csproj", "{3C34EB69-F35D-4C05-8D2E-891C234A6BA1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{3F24C84F-A4BB-4399-A3C2-A11F0F2E77B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3F24C84F-A4BB-4399-A3C2-A11F0F2E77B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3F24C84F-A4BB-4399-A3C2-A11F0F2E77B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3F24C84F-A4BB-4399-A3C2-A11F0F2E77B4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3C34EB69-F35D-4C05-8D2E-891C234A6BA1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C34EB69-F35D-4C05-8D2E-891C234A6BA1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C34EB69-F35D-4C05-8D2E-891C234A6BA1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C34EB69-F35D-4C05-8D2E-891C234A6BA1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {75E27269-B5F6-4A15-B87E-1A12D2CCE022}
+		SolutionGuid = {83A05C8E-76A9-4F7C-9C00-92BAF96EFFBC}
 	EndGlobalSection
 EndGlobal

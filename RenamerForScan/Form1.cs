@@ -1,41 +1,31 @@
-using System;
+﻿using System;
 using System.ComponentModel;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 
-namespace RenamerForScan;
-
-public class Form1 : Form
+namespace RenamerForScan
 {
-	private IContainer components;
+    public partial class Form1 : Form
+    {    	
+        private ListBox listBox1;
 
-	private ListBox listBox1;
+        private Panel panel1;
 
-	private Panel panel1;
+        private PictureBox pictureBox1;
 
-	private PictureBox pictureBox1;
+        private TextBox textBox1;
 
-	private TextBox textBox1;
+        private Button button1;
 
-	private Button button1;
+        private Button button2;
+        private Label label1;
+        private Label label2;
+        private string dir;
 
-	private Button button2;
-    private Label label1;
-    private Label label2;
-    private string dir;
-
-	protected override void Dispose(bool disposing)
-	{
-		if (disposing && components != null)
-		{
-			components.Dispose();
-		}
-		base.Dispose(disposing);
-	}
-
-	private void InitializeComponent()
-	{
+        private void InitializeComponent()
+        {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -146,177 +136,185 @@ public class Form1 : Form
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.listBox1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "Form1";
             this.Text = "RenamerForScan";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
-	}
-
-	public Form1()
-	{
-		InitializeComponent();
-	}
-
-	private void button1_Click(object sender, EventArgs e)
-	{
-		int num = int.Parse(textBox1.Text) + (listBox1.Items.Count - listBox1.SelectedIndex - 1);
-		checkname();
-		string text = "";
-		string text2 = "";
-		string text3 = "";
-		int num2 = num;
-		int num3 = -1;
-		for (int num4 = listBox1.Items.Count - 1; num4 >= 0; num4--)
-		{
-			text2 = dir + "\\" + listBox1.Items[num4].ToString();
-			text = new FileInfo(text2).Extension;
-			text3 = dir + "\\" + num2.ToString("000") + text;
-			File.Move(text2, text3);
-			num2--;
-			if (num2 == 0)
-			{
-				num3 = num4 - 1;
-				break;
-			}
-		}
-		if (num3 != -1)
-		{
-			for (int i = 0; i <= num3; i++)
-			{
-				text2 = dir + "\\" + listBox1.Items[i].ToString();
-				text = new FileInfo(text2).Extension;
-				text3 = dir + "\\000-" + i.ToString("000") + text;
-				File.Move(text2, text3);
-			}
-		}
-		refreshList1(Directory.GetFiles(dir));
-	}
-
-	private void checkname()
-	{
-		string text = "";
-		string text2 = "";
-		string text3 = "";
-		for (int i = 0; i < listBox1.Items.Count; i++)
-		{
-			text2 = dir + "\\" + listBox1.Items[i].ToString();
-			text = new FileInfo(text2).Extension;
-			text3 = dir + "\\RenamerTmp" + DateTime.Now.ToString("yyyyMMddHHmmss");
-			text3 = text3 + i.ToString("000") + text;
-			File.Move(text2, text3);
-		}
-		refreshList1(Directory.GetFiles(dir));
-	}
-
-	private void listBox1_DragEnter(object sender, DragEventArgs e)
-	{
-		if (e.Data.GetDataPresent(DataFormats.FileDrop))
-		{
-			e.Effect = DragDropEffects.Copy;
-		}
-		else
-		{
-			e.Effect = DragDropEffects.None;
-		}
-	}
-
-	private void listBox1_DragDrop(object sender, DragEventArgs e)
-	{
-		string[] array = (string[])e.Data.GetData(DataFormats.FileDrop, autoConvert: false);
-		if (array.Length == 1)
-		{
-			array = Directory.GetFiles(array[0]);
-		}
-		dir = new FileInfo(array[0]).DirectoryName;
-		refreshList1(array);
-	}
-
-	private void refreshList1(string[] fz)
-	{
-		listBox1.Update();
-		if (listBox1.SelectedIndex != -1)
-		{
-			listBox1.SetSelected(listBox1.SelectedIndex, value: false);
-		}
-		listBox1.Items.Clear();
-		foreach (string text in fz)
-		{
-			if ( (text.IndexOf(".jp") >= 0) | (text.IndexOf(".bmp") >= 0) | (text.IndexOf(".gif") >= 0) |
-			 (text.IndexOf(".png") >= 0) | (text.IndexOf(".tif") >= 0) | (text.IndexOf(".webp") >= 0) |
-			 (text.IndexOf(".avif") >= 0) )
-			{
-				listBox1.Items.Add(new FileInfo(text).Name);
-			}
-		}
-	}
-
-	private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
-	{
-		if (!listBox1.Text.Equals(""))
-		{
-			myPainting();
-		}
-	}
-
-	private void myPaintingClear()
-	{
-		Bitmap image = new Bitmap(10, 10);
-		Bitmap image2 = new Bitmap(pictureBox1.Width, pictureBox1.Height);
-		Graphics graphics = Graphics.FromImage(image2);
-		graphics.DrawImage(image, 0, 0);
-		pictureBox1.Image = image2;
-		pictureBox1.Invalidate();
-		pictureBox1.Refresh();
-	}
-
-	private void myPainting()
-	{
-		try
-		{
-			Bitmap bitmap = new Bitmap(dir + "\\" + listBox1.Text);
-			Bitmap image = new Bitmap(pictureBox1.Width, pictureBox1.Height);
-			Graphics graphics = Graphics.FromImage(image);
-			Rectangle rect = new Rectangle(0, 0, bitmap.Width, pictureBox1.Height / 2);
-			Bitmap bitmap2 = bitmap.Clone(rect, bitmap.PixelFormat);
-			graphics.DrawImage(bitmap2, 0, 0, pictureBox1.Width, pictureBox1.Height / 2);
-			bitmap2.Dispose();
-			int num = bitmap.Height - pictureBox1.Height / 2;
-			rect = new Rectangle(0, num, bitmap.Width, pictureBox1.Height / 2);
-			bitmap2 = bitmap.Clone(rect, bitmap.PixelFormat);
-			graphics.DrawImage(bitmap2, 0, pictureBox1.Height / 2, pictureBox1.Width, pictureBox1.Height / 2);
-			bitmap2.Dispose();
-			pictureBox1.Image = image;
-			pictureBox1.Invalidate();
-			pictureBox1.Refresh();
-			bitmap.Dispose();
-		}
-        catch (ArgumentException)
-        {
-			// Unsupported format
         }
-    }
 
-	private void button2_Click(object sender, EventArgs e)
-	{
-		refreshList1(Directory.GetFiles(dir));
-	}
+        public Form1()
+        {
+            InitializeComponent();
+        }
 
-    private void label1_Click(object sender, EventArgs e)
-    {
+        private void button1_Click(object sender, EventArgs e)
+        {
+            int num = int.Parse(textBox1.Text) + (listBox1.Items.Count - listBox1.SelectedIndex - 1);
+            checkname();
+            string text = "";
+            string text2 = "";
+            string text3 = "";
+            int num2 = num;
+            int num3 = -1;
+            for (int num4 = listBox1.Items.Count - 1; num4 >= 0; num4--)
+            {
+                text2 = dir + "\\" + listBox1.Items[num4].ToString();
+                text = new FileInfo(text2).Extension;
+                text3 = dir + "\\" + num2.ToString("000") + text;
+                File.Move(text2, text3);
+                num2--;
+                if (num2 == 0)
+                {
+                    num3 = num4 - 1;
+                    break;
+                }
+            }
+            if (num3 != -1)
+            {
+                for (int i = 0; i <= num3; i++)
+                {
+                    text2 = dir + "\\" + listBox1.Items[i].ToString();
+                    text = new FileInfo(text2).Extension;
+                    text3 = dir + "\\000-" + i.ToString("000") + text;
+                    File.Move(text2, text3);
+                }
+            }
+            refreshList1(Directory.GetFiles(dir));
+        }
 
-    }
+        private void checkname()
+        {
+            string text = "";
+            string text2 = "";
+            string text3 = "";
+            for (int i = 0; i < listBox1.Items.Count; i++)
+            {
+                text2 = dir + "\\" + listBox1.Items[i].ToString();
+                text = new FileInfo(text2).Extension;
+                text3 = dir + "\\RenamerTmp" + DateTime.Now.ToString("yyyyMMddHHmmss");
+                text3 = text3 + i.ToString("000") + text;
+                File.Move(text2, text3);
+            }
+            refreshList1(Directory.GetFiles(dir));
+        }
 
-    private void label2_Click(object sender, EventArgs e)
-    {
+        private void listBox1_DragEnter(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            {
+                e.Effect = DragDropEffects.Copy;
+            }
+            else
+            {
+                e.Effect = DragDropEffects.None;
+            }
+        }
 
-    }
+        private void listBox1_DragDrop(object sender, DragEventArgs e)
+        {
+            string[] array = (string[])e.Data.GetData(DataFormats.FileDrop, autoConvert: false);
+            if (array.Length == 1)
+            {
+                array = Directory.GetFiles(array[0]);
+            }
+            dir = new FileInfo(array[0]).DirectoryName;
+            refreshList1(array);
+        }
 
-    private void pictureBox1_Click(object sender, EventArgs e)
-    {
+        private void refreshList1(string[] fz)
+        {
+            listBox1.Update();
+            if (listBox1.SelectedIndex != -1)
+            {
+                listBox1.SetSelected(listBox1.SelectedIndex, value: false);
+            }
+            listBox1.Items.Clear();
+            foreach (string text in fz)
+            {
+                if ((text.IndexOf(".jp") >= 0) | (text.IndexOf(".bmp") >= 0) | (text.IndexOf(".gif") >= 0) |
+                 (text.IndexOf(".png") >= 0) | (text.IndexOf(".tif") >= 0) | (text.IndexOf(".webp") >= 0) |
+                 (text.IndexOf(".avif") >= 0))
+                {
+                    listBox1.Items.Add(new FileInfo(text).Name);
+                }
+            }
+        }
 
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (!listBox1.Text.Equals(""))
+            {
+                myPainting();
+            }
+        }
+
+        private void myPaintingClear()
+        {
+            Bitmap image = new Bitmap(10, 10);
+            Bitmap image2 = new Bitmap(pictureBox1.Width, pictureBox1.Height);
+            Graphics graphics = Graphics.FromImage(image2);
+            graphics.DrawImage(image, 0, 0);
+            pictureBox1.Image = image2;
+            pictureBox1.Invalidate();
+            pictureBox1.Refresh();
+        }
+
+        private void myPainting()
+        {
+            try
+            {
+                Bitmap bitmap = new Bitmap(dir + "\\" + listBox1.Text);
+                Bitmap image = new Bitmap(pictureBox1.Width, pictureBox1.Height);
+                Graphics graphics = Graphics.FromImage(image);
+                Rectangle rect = new Rectangle(0, 0, bitmap.Width, pictureBox1.Height / 2);
+                Bitmap bitmap2 = bitmap.Clone(rect, bitmap.PixelFormat);
+                graphics.DrawImage(bitmap2, 0, 0, pictureBox1.Width, pictureBox1.Height / 2);
+                bitmap2.Dispose();
+                int num = bitmap.Height - pictureBox1.Height / 2;
+                rect = new Rectangle(0, num, bitmap.Width, pictureBox1.Height / 2);
+                bitmap2 = bitmap.Clone(rect, bitmap.PixelFormat);
+                graphics.DrawImage(bitmap2, 0, pictureBox1.Height / 2, pictureBox1.Width, pictureBox1.Height / 2);
+                bitmap2.Dispose();
+                pictureBox1.Image = image;
+                pictureBox1.Invalidate();
+                pictureBox1.Refresh();
+                bitmap.Dispose();
+            }
+            catch (ArgumentException)
+            {
+                // Unsupported format
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            refreshList1(Directory.GetFiles(dir));
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
