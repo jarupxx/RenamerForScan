@@ -37,6 +37,8 @@ namespace RenamerForScan
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
+            this.KeyPreview = true;
+            this.KeyDown += Form1_KeyDown;
             // 
             // listBox1
             // 
@@ -90,7 +92,7 @@ namespace RenamerForScan
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(153, 30);
             this.button1.TabIndex = 3;
-            this.button1.Text = "リネーム開始";
+            this.button1.Text = "リネーム開始⏎";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -153,7 +155,13 @@ namespace RenamerForScan
         {
             InitializeComponent();
         }
-
+        private void Form1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                button1.PerformClick();
+            }
+        }
         private void button1_Click(object sender, EventArgs e)
         {
             int num = int.Parse(textBox1.Text) + (listBox1.Items.Count - listBox1.SelectedIndex - 1);
