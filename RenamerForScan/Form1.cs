@@ -76,6 +76,7 @@ namespace RenamerForScan
             // 
             // textBox1
             // 
+            this.textBox1.ImeMode = System.Windows.Forms.ImeMode.Disable;
             this.textBox1.Location = new System.Drawing.Point(389, 10);
             this.textBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.textBox1.Name = "textBox1";
