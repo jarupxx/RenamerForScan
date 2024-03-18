@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.ComponentModel;
 using System.Drawing;
 using System.IO;
@@ -222,6 +222,10 @@ namespace RenamerForScan
             string[] array = (string[])e.Data.GetData(DataFormats.FileDrop, autoConvert: false);
             if (array.Length == 1)
             {
+                if (File.Exists(array[0]))
+                {
+                    array[0] = Path.GetDirectoryName(array[0]);
+                }
                 array = Directory.GetFiles(array[0]);
             }
             dir = new FileInfo(array[0]).DirectoryName;
