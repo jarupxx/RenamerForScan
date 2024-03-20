@@ -1,5 +1,4 @@
 using System;
-using System.ComponentModel;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
@@ -164,7 +163,12 @@ namespace RenamerForScan
         }
         private void button1_Click(object sender, EventArgs e)
         {
+            String buff = textBox1.Text;
+            bool canConvert = int.TryParse(buff, out _);
+            if (!canConvert)
+                return;
             int num = int.Parse(textBox1.Text) + (listBox1.Items.Count - listBox1.SelectedIndex - 1);
+            int maxDigits = Math.Max(3, (int)Math.Log10(num) + 1);
             checkname();
             string text = "";
             string text2 = "";
@@ -175,7 +179,7 @@ namespace RenamerForScan
             {
                 text2 = dir + "\\" + listBox1.Items[num4].ToString();
                 text = new FileInfo(text2).Extension;
-                text3 = dir + "\\" + num2.ToString("000") + text;
+                text3 = dir + "\\" + num2.ToString("D" + maxDigits) + text;
                 File.Move(text2, text3);
                 num2--;
                 if (num2 == 0)
@@ -190,7 +194,7 @@ namespace RenamerForScan
                 {
                     text2 = dir + "\\" + listBox1.Items[i].ToString();
                     text = new FileInfo(text2).Extension;
-                    text3 = dir + "\\000-" + i.ToString("000") + text;
+                    text3 = dir + "\\" + 0.ToString("D" + maxDigits) + "-" + i.ToString("D" + maxDigits) + text;
                     File.Move(text2, text3);
                 }
             }
@@ -202,12 +206,13 @@ namespace RenamerForScan
             string text = "";
             string text2 = "";
             string text3 = "";
+            int maxDigits = Math.Max(3, (int)Math.Log10(listBox1.Items.Count) + 1);
             for (int i = 0; i < listBox1.Items.Count; i++)
             {
                 text2 = dir + "\\" + listBox1.Items[i].ToString();
                 text = new FileInfo(text2).Extension;
                 text3 = dir + "\\RenamerTmp" + DateTime.Now.ToString("yyyyMMddHHmmss");
-                text3 = text3 + i.ToString("000") + text;
+                text3 = text3 + i.ToString("D" + maxDigits) + text;
                 File.Move(text2, text3);
             }
             refreshList1(Directory.GetFiles(dir));
@@ -307,7 +312,8 @@ namespace RenamerForScan
 
         private void button2_Click(object sender, EventArgs e)
         {
-            refreshList1(Directory.GetFiles(dir));
+            if (!string.IsNullOrEmpty(dir))
+                refreshList1(Directory.GetFiles(dir));
         }
 
         private void label1_Click(object sender, EventArgs e)
