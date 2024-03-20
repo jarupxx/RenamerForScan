@@ -308,6 +308,10 @@ namespace RenamerForScan
             {
                 // Unsupported format
             }
+            catch (System.OutOfMemoryException)
+            {
+                // bitmap.Height < pictureBox1.Height / 2
+            }
         }
 
         private void button2_Click(object sender, EventArgs e)
