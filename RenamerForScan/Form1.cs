@@ -277,27 +277,37 @@ namespace RenamerForScan
                 Bitmap bitmap = new Bitmap(dir + "\\" + listBox1.Text);
                 Bitmap image = new Bitmap(pictureBox1.Width, pictureBox1.Height);
                 Graphics graphics = Graphics.FromImage(image);
-                Rectangle rect = new Rectangle(0, 0, bitmap.Width, pictureBox1.Height / 2);
-                Bitmap bitmap2 = bitmap.Clone(rect, bitmap.PixelFormat);
-                graphics.DrawImage(bitmap2, 0, 0, pictureBox1.Width, pictureBox1.Height / 2);
-                bitmap2.Dispose();
-                int num = bitmap.Height - pictureBox1.Height / 2;
-                rect = new Rectangle(0, num, bitmap.Width, pictureBox1.Height / 2);
-                bitmap2 = bitmap.Clone(rect, bitmap.PixelFormat);
-                graphics.DrawImage(bitmap2, 0, pictureBox1.Height / 2, pictureBox1.Width, pictureBox1.Height / 2);
-                bitmap2.Dispose();
-                pictureBox1.Image = image;
-                pictureBox1.Invalidate();
-                pictureBox1.Refresh();
-                bitmap.Dispose();
+                if (bitmap.Height > (int)pictureBox1.Height)
+                {
+                    Rectangle rect = new Rectangle(0, 0, bitmap.Width, pictureBox1.Height / 2);
+                    Bitmap bitmap2 = bitmap.Clone(rect, bitmap.PixelFormat);
+                    graphics.DrawImage(bitmap2, 0, 0, pictureBox1.Width, pictureBox1.Height / 2);
+                    bitmap2.Dispose();
+                    int num = bitmap.Height - pictureBox1.Height / 2;
+                    rect = new Rectangle(0, num, bitmap.Width, pictureBox1.Height / 2);
+                    bitmap2 = bitmap.Clone(rect, bitmap.PixelFormat);
+                    graphics.DrawImage(bitmap2, 0, pictureBox1.Height / 2, pictureBox1.Width, pictureBox1.Height / 2);
+                    bitmap2.Dispose();
+                    pictureBox1.Image = image;
+                    pictureBox1.Invalidate();
+                    pictureBox1.Refresh();
+                    bitmap.Dispose();
+                }
+                else
+                {
+                    Rectangle rect = new Rectangle(0, 0, bitmap.Width, bitmap.Height);
+                    Bitmap bitmap2 = bitmap.Clone(rect, bitmap.PixelFormat);
+                    graphics.DrawImage(bitmap2, 0, 0, pictureBox1.Width, pictureBox1.Height);
+                    bitmap2.Dispose();
+                    pictureBox1.Image = image;
+                    pictureBox1.Invalidate();
+                    pictureBox1.Refresh();
+                    bitmap.Dispose();
+                }
             }
             catch (ArgumentException)
             {
                 // Unsupported format
-            }
-            catch (System.OutOfMemoryException)
-            {
-                // bitmap.Height < pictureBox1.Height / 2
             }
         }
 
