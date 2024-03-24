@@ -19,7 +19,6 @@ namespace RenamerForScan
 
         private Button button2;
         private Label label1;
-        private Label label2;
         private string dir;
 
         private void InitializeComponent()
@@ -32,23 +31,22 @@ namespace RenamerForScan
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             this.KeyPreview = true;
             this.KeyDown += Form1_KeyDown;
-            //
+            // 
             // listBox1
             //
             this.listBox1.AllowDrop = true;
             this.listBox1.FormattingEnabled = true;
             this.listBox1.HorizontalScrollbar = true;
-            this.listBox1.ItemHeight = 19;
-            this.listBox1.Location = new System.Drawing.Point(4, 43);
-            this.listBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.listBox1.ItemHeight = 23;
+            this.listBox1.Location = new System.Drawing.Point(4, 52);
+            this.listBox1.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(310, 707);
+            this.listBox1.Size = new System.Drawing.Size(310, 855);
             this.listBox1.TabIndex = 0;
             this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             this.listBox1.DragDrop += new System.Windows.Forms.DragEventHandler(this.listBox1_DragDrop);
@@ -57,19 +55,19 @@ namespace RenamerForScan
             // panel1
             //
             this.panel1.Controls.Add(this.pictureBox1);
-            this.panel1.Location = new System.Drawing.Point(326, 51);
-            this.panel1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.panel1.Location = new System.Drawing.Point(327, 63);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(645, 580);
+            this.panel1.Size = new System.Drawing.Size(645, 702);
             this.panel1.TabIndex = 1;
             //
             // pictureBox1
             //
             this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pictureBox1.Location = new System.Drawing.Point(0, 0);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(645, 580);
+            this.pictureBox1.Size = new System.Drawing.Size(645, 702);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
@@ -78,18 +76,18 @@ namespace RenamerForScan
             // textBox1
             //
             this.textBox1.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.textBox1.Location = new System.Drawing.Point(389, 10);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.textBox1.Location = new System.Drawing.Point(406, 12);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(88, 27);
+            this.textBox1.Size = new System.Drawing.Size(88, 30);
             this.textBox1.TabIndex = 2;
             //
             // button1
             //
-            this.button1.Location = new System.Drawing.Point(487, 10);
-            this.button1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.button1.Location = new System.Drawing.Point(506, 6);
+            this.button1.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(153, 30);
+            this.button1.Size = new System.Drawing.Size(153, 40);
             this.button1.TabIndex = 3;
             this.button1.Text = "リネーム開始⏎";
             this.button1.UseVisualStyleBackColor = true;
@@ -98,9 +96,9 @@ namespace RenamerForScan
             // button2
             //
             this.button2.Location = new System.Drawing.Point(4, 6);
-            this.button2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.button2.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(129, 33);
+            this.button2.Size = new System.Drawing.Size(129, 40);
             this.button2.TabIndex = 4;
             this.button2.Text = "リスト更新";
             this.button2.UseVisualStyleBackColor = true;
@@ -109,29 +107,18 @@ namespace RenamerForScan
             // label1
             //
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(327, 13);
+            this.label1.Location = new System.Drawing.Point(325, 17);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(53, 19);
+            this.label1.Size = new System.Drawing.Size(70, 23);
             this.label1.TabIndex = 5;
             this.label1.Text = "ノンブル";
             this.label1.Click += new System.EventHandler(this.label1_Click);
             //
-            // label2
-            //
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(701, 642);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(267, 95);
-            this.label2.TabIndex = 6;
-            this.label2.Text = "使い方\r\n1) 対象フォルダーをドラッグ && ドロップ\r\n2) 画像を選択\r\n3) ノンブル(選択画像のページ番号)を入力\r\n4) リネーム開始を押下";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
-            //
             // Form1
             //
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 19F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 23F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(980, 746);
-            this.Controls.Add(this.label2);
+            this.ClientSize = new System.Drawing.Size(980, 753);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
@@ -139,7 +126,7 @@ namespace RenamerForScan
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.listBox1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.Name = "Form1";
             this.Text = "RenamerForScan";
             this.Load += new System.EventHandler(this.Form1_Load);
