@@ -18,6 +18,9 @@ namespace RenamerForScan
         private Button button1;
 
         private Button button2;
+
+        private Button button3;
+
         private Label label1;
         private string dir;
 
@@ -30,13 +33,14 @@ namespace RenamerForScan
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             this.KeyPreview = true;
             this.KeyDown += Form1_KeyDown;
-            // 
+            //
             // listBox1
             //
             this.listBox1.AllowDrop = true;
@@ -104,13 +108,24 @@ namespace RenamerForScan
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             //
+            // button3
+            //
+            this.button3.Location = new System.Drawing.Point(144, 6);
+            this.button3.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(129, 40);
+            this.button3.TabIndex = 5;
+            this.button3.Text = "リスト消去";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            //
             // label1
             //
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(325, 17);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(70, 23);
-            this.label1.TabIndex = 5;
+            this.label1.TabIndex = 6;
             this.label1.Text = "ノンブル";
             this.label1.Click += new System.EventHandler(this.label1_Click);
             //
@@ -121,6 +136,7 @@ namespace RenamerForScan
             this.ClientSize = new System.Drawing.Size(980, 753);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button2);
+            this.Controls.Add(this.button3);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.panel1);
@@ -315,6 +331,11 @@ namespace RenamerForScan
         {
             if (!string.IsNullOrEmpty(dir))
                 refreshList1(Directory.GetFiles(dir));
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            listBox1.Items.Clear();
         }
 
         private void label1_Click(object sender, EventArgs e)
