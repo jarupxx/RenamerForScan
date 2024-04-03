@@ -21,6 +21,8 @@ namespace RenamerForScan
 
         private Button button3;
 
+        private CheckBox checkBox1;
+
         private Label label1;
         private string dir;
 
@@ -34,6 +36,7 @@ namespace RenamerForScan
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -119,13 +122,24 @@ namespace RenamerForScan
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             //
+            // checkBox1
+            //
+            this.checkBox1.Checked = true;
+            this.checkBox1.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBox1.Location = new System.Drawing.Point(677, 6);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(106, 40);
+            this.checkBox1.TabIndex = 6;
+            this.checkBox1.Text = "000a形式";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            //
             // label1
             //
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(325, 17);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(70, 23);
-            this.label1.TabIndex = 6;
+            this.label1.TabIndex = 7;
             this.label1.Text = "ノンブル";
             this.label1.Click += new System.EventHandler(this.label1_Click);
             //
@@ -138,10 +152,12 @@ namespace RenamerForScan
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button1);
+            this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.listBox1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.KeyPreview = true;
             this.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.Name = "Form1";
             this.Text = "RenamerForScan";
@@ -193,11 +209,19 @@ namespace RenamerForScan
             }
             if (num3 != -1)
             {
+                char[] letters = "abcdefghijklmnopqrstuvwxyz".ToCharArray();
                 for (int i = 0; i <= num3; i++)
                 {
                     text2 = dir + "\\" + listBox1.Items[i].ToString();
                     text = new FileInfo(text2).Extension;
-                    text3 = dir + "\\" + 0.ToString("D" + maxDigits) + "-" + i.ToString("D" + maxDigits) + text;
+                    if (checkBox1.Checked && num3 < 26)
+                    {
+                        text3 = dir + "\\" + 0.ToString("D" + maxDigits) + letters[i % 26] + text;
+                    }
+                    else
+                    {
+                        text3 = dir + "\\" + 0.ToString("D" + maxDigits) + "-" + i.ToString("D" + maxDigits) + text;
+                    }
                     File.Move(text2, text3);
                 }
             }
